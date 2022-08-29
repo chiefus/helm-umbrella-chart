@@ -22,7 +22,7 @@ openmrs:
 bahmni-web:
   enabled: true
 bahmni-lab:
-  enabled: false
+  enabled: true
 crater:
   enabled: true
   config:
@@ -43,7 +43,7 @@ crater:
     ADMIN_EMAIL: "superman@bahmni.org"
     ADMIN_PASSWORD: "crater123"
 reports:
-  enabled: false
+  enabled: true
   config:
     OPENMRS_HOST: "openmrs"
     OPENMRS_DB_NAME: openmrs
@@ -56,29 +56,29 @@ reports:
     REPORTS_DB_USERNAME: reports-user
     REPORTS_DB_PASSWORD: password
 hiu:
-  enabled: false
+  enabled: true
   config:
     POSTGRES_HOST: bahmni-local-postgresql
     RABBITMQ_HOST: bahmni-local-rabbitmq
 hiu-db:
-  enabled: false
+  enabled: true
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-local-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
 hiu-ui:
-  enabled: false
+  enabled: true
 hip:
-  enabled: false
+  enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-local-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-local-rabbitmq"
 otp-service:
-  enabled: false
+  enabled: true
 postgresql:
-  enabled: false
+  enabled: true
 rabbit-mq:
-  enabled: false
+  enabled: true
 hip-atomfeed:
-  enabled: false
+  enabled: true
 
 rabbitmq:
   auth:
