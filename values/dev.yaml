@@ -1,7 +1,7 @@
 global:
   storageClass: bahmni-efs-sc
   nodeSelector:
-    eks.amazonaws.com/nodegroup: nonprod
+    eks.amazonaws.com/nodegroup: prod
 
 metadata:
   labels:
