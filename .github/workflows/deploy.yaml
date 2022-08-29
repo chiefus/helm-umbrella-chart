@@ -25,7 +25,7 @@ on:
           - performance
 env:
   ENVIRONMENT: ${{ github.event.inputs.environment || 'dev'}}
-  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'lite.mybahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'lite.mybahmni.in') }}
+  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.in') }}
 
 jobs:
   deploy:
@@ -35,7 +35,7 @@ jobs:
       url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'lite.mybahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'lite.mybahmni.in') }}
     runs-on: ubuntu-latest
     env:
-      CLUSTER_NAME: prod
+      CLUSTER_NAME: bahmni-cluster-prod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
