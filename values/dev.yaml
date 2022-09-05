@@ -1,7 +1,7 @@
 global:
   storageClass: bahmni-efs-sc
   nodeSelector:
-    eks.amazonaws.com/nodegroup: nonprod
+    eks.amazonaws.com/nodegroup: litenonprod
 
 metadata:
   labels:
@@ -68,7 +68,7 @@ postgresql:
       accessModes:
         - ReadWriteMany
     nodeSelector:
-      eks.amazonaws.com/nodegroup: nonprod
+      eks.amazonaws.com/nodegroup: litenonprod
 
 rabbitmq:
   enabled: true
@@ -79,7 +79,7 @@ rabbitmq:
     accessModes:
       - ReadWriteMany
   nodeSelector:
-    eks.amazonaws.com/nodegroup: nonprod
+    eks.amazonaws.com/nodegroup: litenonprod
 
 patient-documents:
   enabled: true
