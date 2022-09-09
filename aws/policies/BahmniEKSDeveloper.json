@@ -24,7 +24,7 @@
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/shreeclinic/crater/*",
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/demo/openmrs/*",
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/dev/openmrs/*",
-        "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/shreeclinic/crater/*",
+        "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/shreeclinic/openmrs/*",
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/demo/reports/*",
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/dev/reports/*",
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/shreeclinic/reports/*",
