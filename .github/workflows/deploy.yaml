@@ -24,8 +24,8 @@ on:
           - demo
           - performance
 env:
-  ENVIRONMENT: ${{ github.event.inputs.environment || 'dev'}}
-  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.com' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.com') }}
+  ENVIRONMENT: ${{ github.event.inputs.environment || 'shreeclinic'}}
+  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'shreeclinic') == 'demo' && 'bahmnilite.com' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.com') }}
 
 jobs:
   deploy:
