@@ -1,11 +1,11 @@
 global:
   storageClass: bahmni-efs-sc
   nodeSelector:
-    eks.amazonaws.com/nodegroup: litenonprod
+    eks.amazonaws.com/nodegroup: nonprod
 
 metadata:
   labels:
-    environment: dev
+    environment: shreeclinic
   ingress:
     PROXY_BODY_SIZE: "7m"
 
@@ -31,12 +31,6 @@ reports:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
-  config:
-    POSTGRES_HOST: "bahmni-dev-postgresql"
-    RABBITMQ_HOST: "bahmni-dev-rabbitmq"
-    HIU_ID: "Bahmni"
-    HIU_NAME: "Bahmni"
-
 hiu-db:
   enabled: true
   config:
@@ -51,7 +45,6 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-dev-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-dev-rabbitmq"
-    BAHMNI_ID: "Bahmni"
 otp-service:
   enabled: true
 hip-atomfeed:
@@ -68,7 +61,7 @@ postgresql:
       accessModes:
         - ReadWriteMany
     nodeSelector:
-      eks.amazonaws.com/nodegroup: litenonprod
+      eks.amazonaws.com/nodegroup: nonprod
 
 rabbitmq:
   enabled: true
@@ -79,7 +72,7 @@ rabbitmq:
     accessModes:
       - ReadWriteMany
   nodeSelector:
-    eks.amazonaws.com/nodegroup: litenonprod
+    eks.amazonaws.com/nodegroup: nonprod
 
 patient-documents:
   enabled: true
