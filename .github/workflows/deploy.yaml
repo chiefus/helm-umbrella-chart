@@ -20,22 +20,23 @@ on:
         default: shreeclinic
         options:
           - shreeclinic
+          - dev
           - qa
           - demo
           - performance
 env:
-  ENVIRONMENT: ${{ github.event.inputs.environment || 'shreeclinic'}}
-  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'shreeclinic') == 'demo' && 'bahmnilite.com' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.com') }}
+  ENVIRONMENT: ${{ github.event.inputs.environment || 'dev'}}
+  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'lite.mybahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'lite.mybahmni.in') }}
 
 jobs:
   deploy:
     name: Deploy to ${{ github.event.inputs.environment || 'dev'}} environment
     environment:
       name: ${{ github.event.inputs.environment || 'dev'}}
-      url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.com' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.com') }}
+      url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'lite.mybahmni.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'lite.mybahmni.in') }}
     runs-on: ubuntu-latest
     env:
-      CLUSTER_NAME: bahmni-cluster-litenonprod
+      CLUSTER_NAME: bahmni-cluster-nonprod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
