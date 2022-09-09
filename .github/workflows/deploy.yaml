@@ -19,7 +19,7 @@ on:
         type: choice
         default: shreeclinic
         options:
-          - dev
+          - shreeclinic
           - qa
           - demo
           - performance
