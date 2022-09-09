@@ -5,7 +5,7 @@ global:
 
 metadata:
   labels:
-    environment: shreeclinic
+    environment: dev
   ingress:
     PROXY_BODY_SIZE: "7m"
 
