@@ -44,8 +44,8 @@ jobs:
       - name: Helm Upgrade Monitoring Stack
         run: |
           GRAFANA_ADMIN_PASSWORD=$(aws ssm get-parameter --with-decryption --name "/litenonprod/grafana/ADMIN_PASSWORD" --query "Parameter.Value" --output text)
-          GITHUB_OAUTH_CLIENT_ID=$(aws ssm get-parameter --with-decryption --name "/litenonprod/grafana/oauth/github/bahmniindia/CLIENT_ID" --query "Parameter.Value" --output text)
-          GITHUB_OAUTH_CLIENT_SECRET=$(aws ssm get-parameter --with-decryption --name "/litenonprod/grafana/oauth/github/bahmniindia/CLIENT_SECRET" --query "Parameter.Value" --output text)
+          GITHUB_OAUTH_CLIENT_ID=$(aws ssm get-parameter --with-decryption --name "/litenonprod/grafana/oauth/github/IPLit/CLIENT_ID" --query "Parameter.Value" --output text)
+          GITHUB_OAUTH_CLIENT_SECRET=$(aws ssm get-parameter --with-decryption --name "/litenonprod/grafana/oauth/github/IPLit/CLIENT_SECRET" --query "Parameter.Value" --output text)
           helm upgrade monitoring  prometheus-community/kube-prometheus-stack -n monitoring --create-namespace \
           --values=values/monitoring.yaml \
           --set grafana.adminPassword=$GRAFANA_ADMIN_PASSWORD \
