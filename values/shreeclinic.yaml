@@ -11,13 +11,25 @@ metadata:
 
 openmrs:
   enabled: true
+  metadata:
+    labels:
+      environment: shreeclinic  
 bahmni-web:
   enabled: true
+  metadata:
+    labels:
+      environment: shreeclinic  
 bahmni-lab:
   enabled: true
+  metadata:
+    labels:
+      environment: shreeclinic  
 crater:
   enabled: true
-  config:
+  metadata:
+    labels:
+      environment: shreeclinic
+ config:
     AUTO_INSTALL: "true"
     ADMIN_NAME: Super Man
     COMPANY_NAME: Bahmni
@@ -27,28 +39,56 @@ crater:
     ADMIN_EMAIL: "superman@bahmni.org"
 reports:
   enabled: true
+  metadata:
+    labels:
+      environment: shreeclinic
   config:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
+  config:
+    POSTGRES_HOST: "bahmni-shreeclinic-postgresql"
+    RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
+  metadata:
+    labels:
+      environment: shreeclinic
 hiu-db:
   enabled: true
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-dev-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+  metadata:
+    labels:
+      environment: shreeclinic
 hiu-ui:
   enabled: true
   config:
-    POSTGRES_HOST: bahmni-dev-postgresql
-    RABBITMQ_HOST: bahmni-dev-rabbitmq
+    POSTGRES_HOST: bahmni-shreeclinic-postgresql
+    RABBITMQ_HOST: bahmni-shreeclinic-rabbitmq
+  metadata:
+    labels:
+      environment: shreeclinic
 hip:
   enabled: true
   config:
-    CONNECTION_STRING: "Host=bahmni-dev-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
+    CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-dev-rabbitmq"
+  metadata:
+    labels:
+      environment: shreeclinic
 otp-service:
   enabled: true
+  config:
+    CONNECTION_STRING: "Host=bahmni-performance-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
+  metadata:
+    labels:
+      environment: shreeclinic
 hip-atomfeed:
   enabled: true
+  config:
+    DATABASE_URL: "jdbc:postgresql://bahmni-shreeclinic-postgresql:5432/"
+  metadata:
+    labels:
+      environment: shreeclinic
 
 postgresql:
   enabled: true
@@ -56,7 +96,7 @@ postgresql:
     enabled: true
   primary:
     persistence:
-      subPath: dev
+      subPath: shreeclinic
       storageClass: bahmni-efs-sc
       accessModes:
         - ReadWriteMany
@@ -76,6 +116,9 @@ rabbitmq:
 
 patient-documents:
   enabled: true
+  metadata:
+    labels:
+      environment: shreeclinic
   config:
     OPENMRS_HOST: "openmrs"
 
