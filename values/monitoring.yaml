@@ -3,11 +3,11 @@ grafana:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - monitoring-lite.mybahmni.in
+      - monitoring-lite.bahmnilite.com
   defaultDashboardsTimezone: browser
   grafana.ini:
     server:
-      root_url: https://monitoring-lite.mybahmni.in
+      root_url: https://monitoring-lite.bahmnilite.com
     auth.github:
       enabled: true
       allow_sign_up: true
@@ -27,22 +27,22 @@ grafana:
       isDefault: false
 
   nodeSelector:
-    eks.amazonaws.com/nodegroup: nonprod
+    eks.amazonaws.com/nodegroup: litenonprod
 
 alertmanager:
   alertmanagerSpec:
     nodeSelector:
-      eks.amazonaws.com/nodegroup: nonprod
+      eks.amazonaws.com/nodegroup: litenonprod
 
 prometheusOperator:
   nodeSelector:
-    eks.amazonaws.com/nodegroup: nonprod
+    eks.amazonaws.com/nodegroup: litenonprod
   admissionWebhooks:
     patch:
       nodeSelector:
-        eks.amazonaws.com/nodegroup: nonprod
+        eks.amazonaws.com/nodegroup: litenonprod
 
 prometheus:
   prometheusSpec:
     nodeSelector:
-      eks.amazonaws.com/nodegroup: nonprod
+      eks.amazonaws.com/nodegroup: litenonprod
