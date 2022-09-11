@@ -29,7 +29,7 @@ crater:
   metadata:
     labels:
       environment: shreeclinic
- config:
+  config:
     AUTO_INSTALL: "true"
     ADMIN_NAME: Super Man
     COMPANY_NAME: Bahmni
