@@ -55,7 +55,7 @@ hiu:
 hiu-db:
   enabled: true
   config:
-    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-dev-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-shreeclinic-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
   metadata:
     labels:
       environment: shreeclinic
@@ -78,7 +78,7 @@ hip:
 otp-service:
   enabled: true
   config:
-    CONNECTION_STRING: "Host=bahmni-performance-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
+    CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
       environment: shreeclinic
