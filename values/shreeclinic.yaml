@@ -71,7 +71,7 @@ hip:
   enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
-    RABBITMQ_HOST: "bahmni-dev-rabbitmq"
+    RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
   metadata:
     labels:
       environment: shreeclinic
