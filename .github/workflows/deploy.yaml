@@ -36,7 +36,7 @@ jobs:
       url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.in') }}
     runs-on: ubuntu-latest
     env:
-      CLUSTER_NAME: bahmni-cluster-litenonprod
+      CLUSTER_NAME: bahmni-cluster-nonprod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
