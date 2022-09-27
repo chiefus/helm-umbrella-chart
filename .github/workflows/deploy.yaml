@@ -21,6 +21,8 @@ on:
         options:
           - shreeclinic
           - dev
+          - clinic1
+          - clinic2
           - qa
           - demo
           - performance
