@@ -136,21 +136,23 @@ jobs:
           --values=values/${{ env.ENVIRONMENT }}.yaml \
           --install \
           --namespace ${{ env.ENVIRONMENT }} --create-namespace
-  notification:
-    name: Slack notification
-    needs:
-      - deploy
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Success
-        if: ${{ needs.deploy.result == 'success' }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":">🟢 Bahmni India Distro deployed. \n>*Bahmni* https://${{env.ENVIRONMENT_DNS}} \n>*Payments* https://payments-${{env.ENVIRONMENT_DNS}} \n> <https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}|Umbrella Chart Job #${{github.run_id}}>"}' ${{ secrets.SLACK_WEBHOOK_URL }}
-      - name: Failure
-        if: ${{ needs.deploy.result == 'failure' }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"🔴 Bahmni India Distro deployment failed!!! This is where you go look what happened → <https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}|Umbrella Chart Job #${{github.run_id}}>"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # notification:
+  #   name: Slack notification
+  #   needs:
+  #     - deploy
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   steps:
+  #     - name: Success
+  #       if: ${{ needs.deploy.result == 'success' }}
+  #       run: |
+  #         curl -X POST -H 'Content-type: application/json' --data '{"text":">🟢 Bahmni India Distro deployed. \n>*Bahmni* https://${{env.ENVIRONMENT_DNS}} \n>*Payments* https://payments-${{env.ENVIRONMENT_DNS}} \n> <https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}|Umbrella Chart Job #${{github.run_id}}>"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+  #     - name: Failure
+  #       if: ${{ needs.deploy.result == 'failure' }}
+  #       run: |
+  #         curl -X POST -H 'Content-type: application/json' --data '{"text":"🔴 Bahmni India Distro deployment failed!!! This is where you go look what happened → <https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}|Umbrella Chart Job #${{github.run_id}}>"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
   trigger-e2e-smoke-test-lite:
       name: Trigger E2E Smoke Test in Dev.Lite 
       needs:
