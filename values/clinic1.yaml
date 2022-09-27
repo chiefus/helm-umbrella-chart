@@ -1,0 +1,83 @@
+global:
+  storageClass: bahmni-efs-sc
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: nonprod
+
+metadata:
+  labels:
+    environment: clinic1
+  ingress:
+    PROXY_BODY_SIZE: "7m"
+
+openmrs:
+  enabled: true
+bahmni-web:
+  enabled: true
+bahmni-lab:
+  enabled: true
+crater:
+  enabled: true
+  config:
+    AUTO_INSTALL: "true"
+    ADMIN_NAME: Super Man
+    COMPANY_NAME: Bahmni
+    COMPANY_SLUG: bahmni
+    COUNTRY_ID: 101
+  secrets:
+    ADMIN_EMAIL: "superman@bahmni.org"
+reports:
+  enabled: true
+  config:
+    OPENMRS_HOST: "openmrs"
+hiu:
+  enabled: true
+hiu-db:
+  enabled: true
+  config:
+    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic1-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+hiu-ui:
+  enabled: true
+  config:
+    POSTGRES_HOST: bahmni-clinic1-postgresql
+    RABBITMQ_HOST: bahmni-clinic1-rabbitmq
+hip:
+  enabled: true
+  config:
+    CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
+    RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
+otp-service:
+  enabled: true
+hip-atomfeed:
+  enabled: true
+
+postgresql:
+  enabled: true
+  volumePermissions:
+    enabled: true
+  primary:
+    persistence:
+      subPath: clinic1
+      storageClass: bahmni-efs-sc
+      accessModes:
+        - ReadWriteMany
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: nonprod
+
+rabbitmq:
+  enabled: true
+  auth:
+    erlangCookie: bahmni
+  persistence:
+    storageClass: bahmni-efs-sc
+    accessModes:
+      - ReadWriteMany
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: nonprod
+
+patient-documents:
+  enabled: true
+  config:
+    OPENMRS_HOST: "openmrs"
+
+appointments:
+  enabled: true
