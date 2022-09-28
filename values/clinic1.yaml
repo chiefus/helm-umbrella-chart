@@ -11,12 +11,24 @@ metadata:
 
 openmrs:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
 bahmni-web:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
 bahmni-lab:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
 crater:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   config:
     AUTO_INSTALL: "true"
     ADMIN_NAME: Super Man
@@ -27,28 +39,59 @@ crater:
     ADMIN_EMAIL: "superman@bahmni.org"
 reports:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   config:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
+  config:
+    POSTGRES_HOST: "bahmni-clinic1-postgresql"
+    RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
+    HIU_ID: "sukreet-bahmni"
+    HIU_NAME: "sukreet-bahmni"
+  metadata:
+    labels:
+      environment: clinic1
 hiu-db:
   enabled: true
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic1-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+  metadata:
+    labels:
+      environment: clinic1
 hiu-ui:
   enabled: true
   config:
     POSTGRES_HOST: bahmni-clinic1-postgresql
     RABBITMQ_HOST: bahmni-clinic1-rabbitmq
+  metadata:
+    labels:
+      environment: clinic1
 hip:
   enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
+    BAHMNI_ID: "sukreet-bahmni"
+  metadata:
+    labels:
+      environment: clinic1
 otp-service:
   enabled: true
+  config:
+      CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
+  metadata:
+    labels:
+      environment: clinic1
 hip-atomfeed:
   enabled: true
+  config:
+    DATABASE_URL: "jdbc:postgresql://bahmni-clinic1-postgresql:5432/"
+  metadata:
+    labels:
+      environment: clinic1
 
 postgresql:
   enabled: true
@@ -76,6 +119,9 @@ rabbitmq:
 
 patient-documents:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   config:
     OPENMRS_HOST: "openmrs"
 
