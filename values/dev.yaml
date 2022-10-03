@@ -46,6 +46,9 @@ hip:
     CONNECTION_STRING: "Host=bahmni-dev-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-dev-rabbitmq"
     BAHMNI_ID: "dev"
+  metadata:
+    labels:
+      environment: dev
 otp-service:
   enabled: true
 hip-atomfeed:
