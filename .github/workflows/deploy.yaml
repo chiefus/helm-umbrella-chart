@@ -17,7 +17,7 @@ on:
         description: 'Environment to deploy'
         required: true
         type: choice
-        default: dev
+        default: demo
         options:
           - shreeclinic
           - dev
