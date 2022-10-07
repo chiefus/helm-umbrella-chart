@@ -50,9 +50,9 @@ dependencies:
     version: ~1.0.0-0
     condition: hiu-ui.enabled
 
-  - repository: https://IPLit.github.io/helm-charts
+  - repository: https://iplit.github.io/helm-charts
     name: otp-service
-    version: 1.0.0-8
+    version: ~1.0.0-0
     condition: otp-service.enabled
 
   - repository: https://charts.bitnami.com/bitnami
