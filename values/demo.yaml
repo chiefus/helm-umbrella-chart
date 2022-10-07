@@ -74,7 +74,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-demo-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-demo-rabbitmq"
-    BAHMNI_ID: "sukreet-bahmni"
+    BAHMNI_ID: "bahmni-demo"
   metadata:
     labels:
       environment: demo
