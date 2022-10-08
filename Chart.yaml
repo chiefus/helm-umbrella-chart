@@ -52,7 +52,7 @@ dependencies:
 
   - repository: https://iplit.github.io/helm-charts
     name: otp-service
-    version: ~1.0.0-0
+    version: 1.0.0-9
     condition: otp-service.enabled
 
   - repository: https://charts.bitnami.com/bitnami
