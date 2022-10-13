@@ -50,7 +50,7 @@ hiu:
     POSTGRES_HOST: "bahmni-clinic1-postgresql"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     HIU_ID: "clinic1"
-    HIU_NAME: "Clinic1"
+    HIU_NAME: "clinic1"
   metadata:
     labels:
       environment: clinic1
