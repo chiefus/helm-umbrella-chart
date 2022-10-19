@@ -49,7 +49,7 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-clinic1-postgresql"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
-    HIU_ID: "clinic1"
+    HIU_ID: "IN2710000189"
     HIU_NAME: "clinic1"
   metadata:
     labels:
@@ -76,6 +76,7 @@ hip:
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     BAHMNI_ID: "IN2710000189"
     GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app/"
+    SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
   metadata:
     labels:
       environment: clinic1
