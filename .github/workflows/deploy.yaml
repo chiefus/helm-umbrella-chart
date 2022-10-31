@@ -23,6 +23,7 @@ on:
           - dev
           - clinic1
           - clinic2
+          - clinic3
           - qa
           - demo
           - performance
