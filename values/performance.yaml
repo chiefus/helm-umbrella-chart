@@ -8,6 +8,7 @@ metadata:
     environment: performance
   ingress:
     PROXY_BODY_SIZE: "7m"
+    ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
@@ -49,6 +50,8 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-performance-postgresql"
     RABBITMQ_HOST: "bahmni-performance-rabbitmq"
+    HIU_ID: "Bahmni-Perf"
+    HIU_NAME: "Bahmni-Perf"
   metadata:
     labels:
       environment: performance
@@ -72,6 +75,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-performance-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-performance-rabbitmq"
+    BAHMNI_ID: "Bahmni-Perf"
   metadata:
     labels:
       environment: performance
@@ -121,5 +125,30 @@ patient-documents:
       environment: performance
   config:
     OPENMRS_HOST: "openmrs"
+
 appointments:
   enabled: true
+
+
+crater-atomfeed:
+  enabled: true
+  metadata:
+    labels:
+      environment: performance
+
+implementer-interface:
+  enabled: true
+  metadata:
+    labels:
+      environment: performance
+
+clinic-config:
+  metadata:
+    labels:
+      environment: performance
+
+abha-verification:
+  enabled: true
+  metadata:
+    labels:
+      environment: performance

@@ -8,6 +8,7 @@ metadata:
     environment: shreeclinic
   ingress:
     PROXY_BODY_SIZE: "7m"
+    ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
@@ -124,3 +125,26 @@ patient-documents:
 
 appointments:
   enabled: true
+
+crater-atomfeed:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic1
+
+implementer-interface:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic1
+
+clinic-config:
+  metadata:
+    labels:
+      environment: clinic1
+
+abha-verification:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic1
