@@ -8,6 +8,7 @@ metadata:
     environment: clinic2
   ingress:
     PROXY_BODY_SIZE: "7m"
+    ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
@@ -128,3 +129,26 @@ patient-documents:
 
 appointments:
   enabled: true
+
+crater-atomfeed:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic2
+
+implementer-interface:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic2
+
+clinic-config:
+  metadata:
+    labels:
+      environment: clinic2
+
+abha-verification:
+  enabled: true
+  metadata:
+    labels:
+      environment: clinic2

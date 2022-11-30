@@ -82,6 +82,26 @@ spec:
                   number: 80
           {{- end }}
 
+          {{- if index .Values "implementer-interface" "enabled" }}
+          - path: /implementer-interface
+            pathType: Prefix
+            backend:
+              service:
+                name: implementer-interface
+                port:
+                  number: 80
+          {{- end }}
+
+          {{- if index .Values "abha-verification" "enabled" }}
+          - path: /abha-verification
+            pathType: Prefix
+            backend:
+              service:
+                name: abha-verification
+                port:
+                  number: 80
+         {{- end }}
+
     - host: payments-{{ .Values.ingress.host }}
       http:
         paths:
@@ -130,6 +150,7 @@ metadata:
   labels:
     environment: {{ .Values.metadata.labels.environment }}
   annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.ABDM_PROXY_BODY_SIZE }}
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/server-snippet: |
       location ^~ /hiprovider {

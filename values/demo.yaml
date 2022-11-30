@@ -8,6 +8,7 @@ metadata:
     environment: demo
   ingress:
     PROXY_BODY_SIZE: "7m"
+    ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
@@ -49,8 +50,8 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-demo-postgresql"
     RABBITMQ_HOST: "bahmni-demo-rabbitmq"
-    HIU_ID: "sukreet-bahmni"
-    HIU_NAME: "sukreet-bahmni"
+    HIU_ID: "Bahmni-Demo"
+    HIU_NAME: "Bahmni-Demo"
   metadata:
     labels:
       environment: demo
@@ -74,7 +75,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-demo-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-demo-rabbitmq"
-    BAHMNI_ID: "bahmni-demo"
+    BAHMNI_ID: "Bahmni-Demo"
   metadata:
     labels:
       environment: demo
@@ -127,3 +128,27 @@ patient-documents:
 
 appointments:
   enabled: true
+
+
+crater-atomfeed:
+  enabled: true
+  metadata:
+    labels:
+      environment: demo
+
+implementer-interface:
+  enabled: true
+  metadata:
+    labels:
+      environment: demo
+
+clinic-config:
+  metadata:
+    labels:
+      environment: demo
+
+abha-verification:
+  enabled: true
+  metadata:
+    labels:
+      environment: demo

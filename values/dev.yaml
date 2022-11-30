@@ -8,6 +8,7 @@ metadata:
     environment: dev
   ingress:
     PROXY_BODY_SIZE: "7m"
+    ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
@@ -31,6 +32,12 @@ reports:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
+  config:
+    POSTGRES_HOST: "bahmni-dev-postgresql"
+    RABBITMQ_HOST: "bahmni-dev-rabbitmq"
+    HIU_ID: "Bahmni"
+    HIU_NAME: "Bahmni"
+
 hiu-db:
   enabled: true
   config:
@@ -85,3 +92,26 @@ patient-documents:
 
 appointments:
   enabled: true
+
+crater-atomfeed:
+  enabled: true
+  metadata:
+    labels:
+      environment: dev
+
+implementer-interface:
+  enabled: true
+  metadata:
+    labels:
+      environment: dev
+
+clinic-config:
+  metadata:
+    labels:
+      environment: dev
+
+abha-verification:
+  enabled: true
+  metadata:
+    labels:
+      environment: dev
