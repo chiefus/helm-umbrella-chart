@@ -50,6 +50,8 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-shreeclinic-postgresql"
     RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
+    HIU_ID: "shreeclinic"
+    HIU_NAME: "shreeclinic"
   metadata:
     labels:
       environment: shreeclinic
@@ -73,6 +75,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
+    BAHMNI_ID: "shreeclinic"
   metadata:
     labels:
       environment: shreeclinic
