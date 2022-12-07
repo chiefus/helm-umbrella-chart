@@ -50,8 +50,8 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-clinic1-postgresql"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
-    HIU_ID: "IN2710000189"
-    HIU_NAME: "clinic1"
+    HIU_ID: "iplitclinic1"
+    HIU_NAME: "iplitclinic1"
   metadata:
     labels:
       environment: clinic1
