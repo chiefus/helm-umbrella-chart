@@ -12,6 +12,12 @@ metadata:
 
 openmrs:
   enabled: true
+  secrets:
+    OMRS_DB_USERNAME: openmrs-user
+    OMRS_DB_PASSWORD: password
+    OMRS_DB_HOSTNAME: mysql
+  config:
+    OMRS_DB_NAME: openmrs
   metadata:
     labels:
       environment: clinic1
@@ -111,6 +117,8 @@ postgresql:
         - ReadWriteMany
     nodeSelector:
       eks.amazonaws.com/nodegroup: nonprod
+  image:
+    tag: 14-debian-11
 
 rabbitmq:
   enabled: true
@@ -122,6 +130,9 @@ rabbitmq:
       - ReadWriteMany
   nodeSelector:
     eks.amazonaws.com/nodegroup: nonprod
+  image:
+    repository: rabbitmq
+    tag: alpine
 
 patient-documents:
   enabled: true
