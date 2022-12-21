@@ -57,12 +57,12 @@ dependencies:
 
   - repository: https://charts.bitnami.com/bitnami
     name: postgresql
-    version: 11.2.6
+    version: 12.1.2
     condition: postgresql.enabled
 
   - repository: https://charts.bitnami.com/bitnami
     name: rabbitmq
-    version: 9.1.4
+    version: 11.1.2
     condition: rabbitmq.enabled
 
   - repository: https://bahmni.github.io/helm-charts
