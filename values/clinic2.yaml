@@ -12,6 +12,12 @@ metadata:
 
 openmrs:
   enabled: true
+  secrets:
+    OMRS_DB_USERNAME: openmrs-user
+    OMRS_DB_PASSWORD: password
+    OMRS_DB_HOSTNAME: mysql
+  config:
+    OMRS_DB_NAME: openmrs
   metadata:
     labels:
       environment: clinic2
