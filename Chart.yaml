@@ -57,7 +57,7 @@ dependencies:
 
   - repository: https://charts.bitnami.com/bitnami
     name: postgresql
-    version: 11.9.13
+    version: 12.1.2
     condition: postgresql.enabled
 
   - repository: https://charts.bitnami.com/bitnami
@@ -90,7 +90,7 @@ dependencies:
     version: ~1.0.0-0
     condition: implementer-interface.enabled
 
-  - repository: https://bahmniindiadistro.github.io/helm-charts
+  - repository: https://bahmni.github.io/helm-charts
     name: clinic-config
     version: ~1.0.0-0
 
@@ -98,3 +98,13 @@ dependencies:
     name: abha-verification
     version: ~1.0.0-0
     condition: abha-verification.enabled
+
+  - repository: https://bahmni.github.io/helm-charts
+    name: bahmni-metabase
+    version: ~1.0.0-0
+    condition: bahmni-metabase.enabled
+    
+  - repository: https://bahmni.github.io/helm-charts
+    name: bahmni-mart
+    version: ~1.0.0-0
+    condition: bahmni-mart.enabled
