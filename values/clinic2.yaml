@@ -62,9 +62,6 @@ hiu-db:
       environment: clinic2
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic2-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
-  metadata:
-    labels:
-      environment: clinic2
 hiu-ui:
   enabled: true
   metadata:
@@ -73,9 +70,6 @@ hiu-ui:
   config:
     POSTGRES_HOST: bahmni-clinic2-postgresql
     RABBITMQ_HOST: bahmni-clinic2-rabbitmq
-  metadata:
-    labels:
-      environment: clinic2
 hip:
   enabled: true
   metadata:
@@ -144,16 +138,14 @@ crater-atomfeed:
   metadata:
     labels:
       environment: clinic2
-  metadata:
-    labels:
-      environment: clinic2
 appointments:
   enabled: true
+implementer-interface:
+  enabled: true
   metadata:
     labels:
       environment: clinic2
-implementer-interface:
-  enabled: true
+clinic-config:
   metadata:
     labels:
       environment: clinic2
@@ -164,9 +156,6 @@ abha-verification:
       environment: clinic2
 bahmni-metabase:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   config:
     MB_DB_TYPE: postgres
     MB_DB_DBNAME: 'metabase'
@@ -179,9 +168,6 @@ bahmni-metabase:
 
 bahmni-mart:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   config:
     MART_DB_NAME: martdb
   secrets:
