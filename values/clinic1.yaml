@@ -12,12 +12,6 @@ metadata:
 
 openmrs:
   enabled: true
-  secrets:
-    OMRS_DB_USERNAME: openmrs-user
-    OMRS_DB_PASSWORD: password
-    OMRS_DB_HOSTNAME: mysql
-  config:
-    OMRS_DB_NAME: openmrs
   metadata:
     labels:
       environment: clinic1
@@ -53,33 +47,37 @@ reports:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   config:
     POSTGRES_HOST: "bahmni-clinic1-postgresql"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     HIU_ID: "iplitclinic1"
     HIU_NAME: "iplitclinic1"
     GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
-    GATEWAY_REQUEST_TIMEOUT: 21000
-  metadata:
-    labels:
-      environment: clinic1
+    GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
 hiu-db:
   enabled: true
-  config:
-    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic1-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
   metadata:
     labels:
       environment: clinic1
+  config:
+    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic1-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
 hiu-ui:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   config:
     POSTGRES_HOST: bahmni-clinic1-postgresql
     RABBITMQ_HOST: bahmni-clinic1-rabbitmq
+hip:
+  enabled: true
   metadata:
     labels:
       environment: clinic1
-hip:
-  enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
@@ -87,26 +85,23 @@ hip:
     GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
     CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
-  metadata:
-    labels:
-      environment: clinic1
 otp-service:
   enabled: true
-  config:
-      CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
       environment: clinic1
 hip-atomfeed:
   enabled: true
-  config:
+  config:	
     DATABASE_URL: "jdbc:postgresql://bahmni-clinic1-postgresql:5432/"
   metadata:
     labels:
       environment: clinic1
-
 postgresql:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   volumePermissions:
     enabled: true
   primary:
@@ -122,6 +117,9 @@ postgresql:
 
 rabbitmq:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
   auth:
     erlangCookie: bahmni
   persistence:
@@ -142,28 +140,42 @@ patient-documents:
   config:
     OPENMRS_HOST: "openmrs"
 
-appointments:
-  enabled: true
-
 crater-atomfeed:
   enabled: true
   metadata:
     labels:
       environment: clinic1
-
+appointments:
+  enabled: true
 implementer-interface:
   enabled: true
   metadata:
     labels:
       environment: clinic1
-
 clinic-config:
   metadata:
     labels:
       environment: clinic1
-
 abha-verification:
   enabled: true
   metadata:
     labels:
       environment: clinic1
+bahmni-metabase:
+  enabled: true
+  config:
+    MB_DB_TYPE: postgres
+    MB_DB_DBNAME: 'metabase'
+    MB_DB_PORT:  5432
+    MART_DB_NAME: martdb
+  secrets:
+    MB_ADMIN_FIRST_NAME: 'Admin'
+    MB_DB_HOST: 'bahmni-clinic1-postgresql'
+    MART_DB_HOST: 'bahmni-clinic1-postgresql'
+
+bahmni-mart:
+  enabled: true
+  config:
+    MART_DB_NAME: martdb
+  secrets:
+    MART_DB_HOST: "bahmni-clinic1-postgresql"
