@@ -153,6 +153,7 @@ implementer-interface:
     labels:
       environment: clinic1
 clinic-config:
+  enabled: true
   metadata:
     labels:
       environment: clinic1
