@@ -92,9 +92,6 @@ hip-atomfeed:
       environment: clinic2
 postgresql:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   volumePermissions:
     enabled: true
   primary:
@@ -110,9 +107,6 @@ postgresql:
 
 rabbitmq:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   auth:
     erlangCookie: bahmni
   persistence:
