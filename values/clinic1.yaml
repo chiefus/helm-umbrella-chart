@@ -56,6 +56,7 @@ hiu:
     HIU_ID: "iplitclinic1"
     HIU_NAME: "iplitclinic1"
     GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    GATEWAY_REQUEST_TIMEOUT: 21000
     GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
 hiu-db:
@@ -87,12 +88,14 @@ hip:
     CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
 otp-service:
   enabled: true
+  config:
+    CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
       environment: clinic1
 hip-atomfeed:
   enabled: true
-  config:	
+  config:
     DATABASE_URL: "jdbc:postgresql://bahmni-clinic1-postgresql:5432/"
   metadata:
     labels:
