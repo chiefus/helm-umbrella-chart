@@ -94,6 +94,9 @@ hip-atomfeed:
       environment: clinic2
 postgresql:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic2
   volumePermissions:
     enabled: true
   primary:
@@ -106,9 +109,11 @@ postgresql:
       eks.amazonaws.com/nodegroup: nonprod
   image:
     tag: 14-debian-11
-
 rabbitmq:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic2
   auth:
     erlangCookie: bahmni
   persistence:
