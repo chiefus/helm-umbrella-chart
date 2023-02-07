@@ -150,9 +150,6 @@ crater-atomfeed:
       environment: clinic1
 appointments:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic1
 implementer-interface:
   enabled: true
   metadata:
