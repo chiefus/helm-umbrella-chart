@@ -150,6 +150,9 @@ crater-atomfeed:
       environment: clinic1
 appointments:
   enabled: true
+  metadata:
+    labels:
+      environment: clinic1
 implementer-interface:
   enabled: true
   metadata:
@@ -166,7 +169,7 @@ abha-verification:
     labels:
       environment: clinic1
 bahmni-metabase:
-  enabled: true
+  enabled: false
   config:
     MB_DB_TYPE: postgres
     MB_DB_DBNAME: 'metabase'
@@ -178,7 +181,7 @@ bahmni-metabase:
     MART_DB_HOST: 'bahmni-clinic1-postgresql'
 
 bahmni-mart:
-  enabled: true
+  enabled: false
   config:
     MART_DB_NAME: martdb
   secrets:
