@@ -89,6 +89,8 @@ otp-service:
       environment: clinic2
 hip-atomfeed:
   enabled: true
+  config:
+    DATABASE_URL: "jdbc:postgresql://bahmni-clinic2-postgresql:5432/"
   metadata:
     labels:
       environment: clinic2
