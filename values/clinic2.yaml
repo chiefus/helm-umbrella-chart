@@ -47,39 +47,38 @@ reports:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   config:
     POSTGRES_HOST: "bahmni-clinic2-postgresql"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
     HIU_ID: "clinic2"
     HIU_NAME: "clinic2"
+  metadata:
+    labels:
+      environment: clinic2
 hiu-db:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic2-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
-hiu-ui:
-  enabled: true
   metadata:
     labels:
       environment: clinic2
+hiu-ui:
+  enabled: true
   config:
     POSTGRES_HOST: bahmni-clinic2-postgresql
     RABBITMQ_HOST: bahmni-clinic2-rabbitmq
-hip:
-  enabled: true
   metadata:
     labels:
       environment: clinic2
+hip:
+  enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
     BAHMNI_ID: "clinic2"
-#   GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+  metadata:
+    labels:
+      environment: clinic2
 otp-service:
   enabled: true
   config:
@@ -94,11 +93,9 @@ hip-atomfeed:
   metadata:
     labels:
       environment: clinic2
+
 postgresql:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   volumePermissions:
     enabled: true
   primary:
@@ -111,11 +108,9 @@ postgresql:
       eks.amazonaws.com/nodegroup: nonprod
   image:
     tag: 14-debian-11
+
 rabbitmq:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic2
   auth:
     erlangCookie: bahmni
   persistence:
@@ -136,27 +131,33 @@ patient-documents:
   config:
     OPENMRS_HOST: "openmrs"
 
+appointments:
+  enabled: true
+
+
 crater-atomfeed:
   enabled: true
   metadata:
     labels:
       environment: clinic2
-appointments:
-  enabled: true
+
 implementer-interface:
   enabled: true
   metadata:
     labels:
       environment: clinic2
+
 clinic-config:
   metadata:
     labels:
       environment: clinic2
+
 abha-verification:
   enabled: true
   metadata:
     labels:
       environment: clinic2
+
 bahmni-metabase:
   enabled: true
   config:

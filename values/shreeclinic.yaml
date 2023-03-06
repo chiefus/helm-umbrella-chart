@@ -14,17 +14,17 @@ openmrs:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic  
+      environment: shreeclinic
 bahmni-web:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic  
+      environment: shreeclinic
 bahmni-lab:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic  
+      environment: shreeclinic
 crater:
   enabled: true
   metadata:
@@ -106,6 +106,8 @@ postgresql:
         - ReadWriteMany
     nodeSelector:
       eks.amazonaws.com/nodegroup: nonprod
+  image:
+    tag: 14-debian-11
 
 rabbitmq:
   enabled: true
@@ -117,6 +119,9 @@ rabbitmq:
       - ReadWriteMany
   nodeSelector:
     eks.amazonaws.com/nodegroup: nonprod
+  image:
+    repository: rabbitmq
+    tag: alpine
 
 patient-documents:
   enabled: true
@@ -129,25 +134,45 @@ patient-documents:
 appointments:
   enabled: true
 
+
 crater-atomfeed:
   enabled: true
   metadata:
     labels:
-      environment: clinic1
+      environment: shreeclinic
 
 implementer-interface:
   enabled: true
   metadata:
     labels:
-      environment: clinic1
+      environment: shreeclinic
 
 clinic-config:
   metadata:
     labels:
-      environment: clinic1
+      environment: shreeclinic
 
 abha-verification:
   enabled: true
   metadata:
     labels:
-      environment: clinic1
+      environment: shreeclinic
+
+bahmni-metabase:
+  enabled: true
+  config:
+    MB_DB_TYPE: postgres
+    MB_DB_DBNAME: 'metabase'
+    MB_DB_PORT:  5432
+    MART_DB_NAME: martdb
+  secrets:
+    MB_ADMIN_FIRST_NAME: 'Admin'
+    MB_DB_HOST: 'bahmni-shreeclinic-postgresql'
+    MART_DB_HOST: 'bahmni-shreeclinic-postgresql'
+
+bahmni-mart:
+  enabled: true
+  config:
+    MART_DB_NAME: martdb
+  secrets:
+    MART_DB_HOST: "bahmni-shreeclinic-postgresql"

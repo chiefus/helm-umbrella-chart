@@ -47,9 +47,6 @@ reports:
     OPENMRS_HOST: "openmrs"
 hiu:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic1
   config:
     POSTGRES_HOST: "bahmni-clinic1-postgresql"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
@@ -59,26 +56,26 @@ hiu:
     GATEWAY_REQUEST_TIMEOUT: 21000
     GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+  metadata:
+    labels:
+      environment: clinic1
 hiu-db:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic1
   config:
     JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic1-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
-hiu-ui:
-  enabled: true
   metadata:
     labels:
       environment: clinic1
+hiu-ui:
+  enabled: true
   config:
     POSTGRES_HOST: bahmni-clinic1-postgresql
     RABBITMQ_HOST: bahmni-clinic1-rabbitmq
-hip:
-  enabled: true
   metadata:
     labels:
       environment: clinic1
+hip:
+  enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
@@ -86,6 +83,9 @@ hip:
     GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
     CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+  metadata:
+    labels:
+      environment: clinic1
 otp-service:
   enabled: true
   config:
@@ -100,11 +100,9 @@ hip-atomfeed:
   metadata:
     labels:
       environment: clinic1
+
 postgresql:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic1
   volumePermissions:
     enabled: true
   primary:
@@ -120,9 +118,6 @@ postgresql:
 
 rabbitmq:
   enabled: true
-  metadata:
-    labels:
-      environment: clinic1
   auth:
     erlangCookie: bahmni
   persistence:
@@ -143,30 +138,35 @@ patient-documents:
   config:
     OPENMRS_HOST: "openmrs"
 
+appointments:
+  enabled: true
+
+
 crater-atomfeed:
   enabled: true
   metadata:
     labels:
       environment: clinic1
-appointments:
-  enabled: true
+
 implementer-interface:
   enabled: true
   metadata:
     labels:
       environment: clinic1
+
 clinic-config:
-  enabled: true
   metadata:
     labels:
       environment: clinic1
+
 abha-verification:
   enabled: true
   metadata:
     labels:
       environment: clinic1
+
 bahmni-metabase:
-  enabled: false
+  enabled: true
   config:
     MB_DB_TYPE: postgres
     MB_DB_DBNAME: 'metabase'
@@ -178,7 +178,7 @@ bahmni-metabase:
     MART_DB_HOST: 'bahmni-clinic1-postgresql'
 
 bahmni-mart:
-  enabled: false
+  enabled: true
   config:
     MART_DB_NAME: martdb
   secrets:
