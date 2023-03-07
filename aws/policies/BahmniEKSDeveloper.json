@@ -53,7 +53,7 @@
         "arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/performance/crater_atomfeed/*",
 		"arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/clinic1/crater_atomfeed/*",
 		"arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/clinic2/crater_atomfeed/*",
-		"arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/clinic3/crater_atomfeed/*",
+		"arn:aws:ssm:ap-south-1:{YourAccountNumber}:parameter/clinic3/crater_atomfeed/*"
       ]
 
     }
