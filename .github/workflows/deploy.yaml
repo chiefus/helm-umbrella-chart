@@ -25,6 +25,7 @@ on:
           - clinic1
           - clinic2
           - clinic3
+          - deodharhospital
           - qa
           - demo
           - performance
