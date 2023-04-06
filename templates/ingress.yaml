@@ -6,8 +6,21 @@ metadata:
     environment: {{ .Values.metadata.labels.environment }}
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header  X-Frame-Options "SAMEORIGIN";
+      add_header Cache-Control "no-cache, max-age=0";
+      add_header Content-Security-Policy "upgrade-insecure-requests; block-all-mixed-content";
+      add_header Cross-Origin-Embedder-Policy "require-corp";
+      add_header Cross-Origin-Opener-Policy "same-origin";
+      add_header Cross-Origin-Resource-Policy "same-origin";
+      add_header Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), document-domain=(), encrypted-media=(), gamepad=(), geolocation=(), gyroscope=(), layout-animations=self, legacy-image-formats=self, magnetometer=(), midi=(), oversized-images=self, payment=(), publickey-credentials-get=(), speaker-selection=(), sync-xhr=self, unoptimized-images=self, unsized-media=self, usb=(), screen-wake-lock=(), web-share=(), xr-spatial-tracking=()";
+      add_header Pragma "no-cache";
+      add_header Referrer-Policy "same-origin";
+      add_header Strict-Transport-Security "max-age=31536000 ; includeSubDomains";
+      add_header X-Content-Type-Options "nosniff";
+      add_header X-Frame-Options "SAMEORIGIN";
+      add_header X-Permitted-Cross-Domain-Policies "none";
+      add_header Set-Cookie "Path=/; HttpOnly; Secure";
     nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.PROXY_BODY_SIZE }}
+    nginx.ingress.kubernetes.io/secure-backends: "true"
 spec:
   ingressClassName: nginx
   rules:
