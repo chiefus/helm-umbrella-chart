@@ -80,9 +80,9 @@ hip:
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     BAHMNI_ID: "iplitclinic1"
-    GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
-    SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
-    CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    # GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    # SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    # CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
   metadata:
     labels:
       environment: clinic1
