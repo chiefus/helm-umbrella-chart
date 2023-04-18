@@ -1,0 +1,60 @@
+name: Refresh Route53 for Environment
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to refresh'
+        required: true
+        type: choice
+        default: demo
+        options:
+          - shreeclinic
+          - dev
+          - clinic1
+          - clinic2
+          - clinic3
+          - deodharhospital
+          - qa
+          - demo
+          - performance
+env:
+  ENVIRONMENT: ${{ github.event.inputs.environment || 'dev'}}
+  ENVIRONMENT_DNS: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.in') }}
+
+jobs:
+  refresh_route53:
+    name: Refresh Route53 for ${{ github.event.inputs.environment || 'dev'}} environment
+    concurrency: ${{ github.event.inputs.environment || 'dev'}}
+    environment:
+      name: ${{ github.event.inputs.environment || 'dev'}}
+      url: ${{ (github.event.inputs.environment || 'dev') == 'demo' && 'bahmnilite.in' || format('{0}.{1}', github.event.inputs.environment || 'dev', 'bahmnilite.in') }}
+    runs-on: ubuntu-latest
+    env:
+      CLUSTER_NAME: bahmni-cluster-nonprod
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.BAHMNI_AWS_ID }}
+          aws-secret-access-key: ${{ secrets.BAHMNI_AWS_SECRET }}
+          aws-region: ${{ secrets.BAHMNI_AWS_REGION }}
+          role-to-assume: ${{ secrets.BAHMNI_INFRA_ADMIN_ROLE }}
+          role-duration-seconds: 900 # 15 mins
+          role-session-name: BahmniInfraAdminSession
+      - name: Authorise Kubectl with EKS
+        run: aws eks update-kubeconfig --name $CLUSTER_NAME
+      - name: Refresh Route53 A record with INGRESS_DNS
+        run: |
+          INGRESS_DNS=$(kubectl -n ingress-nginx  get svc ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+          jq --arg ingress_dns "$INGRESS_DNS" \
+             --arg environment_dns "$ENVIRONMENT_DNS" \
+             '.Changes[].ResourceRecordSet.AliasTarget.DNSName = $ingress_dns | .Changes[0].ResourceRecordSet.Name = $environment_dns | .Changes[1].ResourceRecordSet.Name = "payments-"+$environment_dns' \
+              aws/route53/lite.mybahmni.in.json > recordset
+          aws route53 change-resource-record-sets --hosted-zone-id ${{ secrets.HOSTED_ZONE_ID }} --change-batch file://recordset
