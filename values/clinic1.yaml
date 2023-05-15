@@ -88,6 +88,7 @@ hip:
 otp-service:
   enabled: true
   config:
+    WHITELISTED_NUMBERS: "+919082223162,9082223162"
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
