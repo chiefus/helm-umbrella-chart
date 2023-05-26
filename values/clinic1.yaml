@@ -51,7 +51,7 @@ hiu:
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     HIU_ID: "iplitclinic1"
     HIU_NAME: "iplitclinic1"
-    GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app/v0.5"
     # GATEWAY_REQUEST_TIMEOUT: 21000
     # GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     # CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
