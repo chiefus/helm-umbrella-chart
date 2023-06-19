@@ -51,8 +51,8 @@ hiu:
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     HIU_ID: "iplitclinic1"
     HIU_NAME: "iplitclinic1"
-    GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app/v0.5"
-    GATEWAY_REQUEST_TIMEOUT: 6000
+    # GATEWAY_BASE_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app/v0.5"
+    GATEWAY_REQUEST_TIMEOUT: 5000
     # GATEWAY_REQUEST_TIMEOUT: 21000
     # GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
     # CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
@@ -80,16 +80,17 @@ hip:
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic1-rabbitmq"
     BAHMNI_ID: "iplitclinic1"
-    GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
-    SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
-    CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    # GATEWAY_URL: "https://nha-suma-azb7fa3pfa-el.a.run.app"
+    # SESSION_GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    # CORS_ALLOWED_ORIGIN: "https://nha-suma-azb7fa3pfa-el.a.run.app"
   metadata:
     labels:
       environment: clinic1
 otp-service:
   enabled: true
   config:
-    WHITELISTED_NUMBERS: "+919082223162,9082223162"
+    WHITELISTED_NUMBERS: "+919082223162,9082223162,+919821769090,9821769090,+919820449045,9820449045"
     CONNECTION_STRING: "Host=bahmni-clinic1-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
