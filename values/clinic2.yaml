@@ -50,8 +50,8 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-clinic2-postgresql"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    HIU_ID: "clinic2"
-    HIU_NAME: "clinic2"
+    HIU_ID: "IN2710000191"
+    HIU_NAME: "IPLitClinic2"
   metadata:
     labels:
       environment: clinic2
@@ -75,7 +75,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    BAHMNI_ID: "clinic2"
+    BAHMNI_ID: "IN2710000191"
   metadata:
     labels:
       environment: clinic2
