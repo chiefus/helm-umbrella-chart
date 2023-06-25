@@ -76,6 +76,7 @@ hip:
     CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
     BAHMNI_ID: "IN2710000191"
+    GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
   metadata:
     labels:
       environment: clinic2
