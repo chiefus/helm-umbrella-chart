@@ -50,7 +50,7 @@ hiu:
   config:
     POSTGRES_HOST: "bahmni-clinic2-postgresql"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    HIU_ID: "IN2710000191"
+    HIU_ID: "IPLitClinic2"
     HIU_NAME: "IPLitClinic2"
   metadata:
     labels:
@@ -75,8 +75,7 @@ hip:
   config:
     CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    BAHMNI_ID: "IN2710000191"
-    # GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    BAHMNI_ID: "IPLitClinic2"
   metadata:
     labels:
       environment: clinic2
