@@ -30,7 +30,7 @@ dependencies:
     version: ~1.0.0-0
     condition: reports.enabled
 
-  - repository: https://bahmniindiadistro.github.io/helm-charts
+  - repository: https://iplit.github.io/helm-charts
     name: hip
     version: ~1.0.0-0
     condition: hip.enabled
