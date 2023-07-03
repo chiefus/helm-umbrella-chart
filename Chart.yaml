@@ -45,7 +45,7 @@ dependencies:
     version: ~1.0.0-0
     condition: hiu-db.enabled
 
-  - repository: https://bahmniindiadistro.github.io/helm-charts
+  - repository: https://iplit.github.io/helm-charts
     name: hiu-ui
     version: ~1.0.0-0
     condition: hiu-ui.enabled
