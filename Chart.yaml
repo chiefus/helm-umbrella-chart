@@ -94,7 +94,7 @@ dependencies:
     name: clinic-config
     version: ~1.0.0-0
 
-  - repository: https://bahmniindiadistro.github.io/helm-charts
+  - repository: https://iplit.github.io/helm-charts
     name: abha-verification
     version: ~1.0.0-0
     condition: abha-verification.enabled
