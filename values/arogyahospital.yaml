@@ -5,26 +5,26 @@ global:
 
 metadata:
   labels:
-    environment: shreeclinic
+    environment: arogyahospital
   ingress:
     PROXY_BODY_SIZE: "7m"
     ABDM_PROXY_BODY_SIZE: "30m"
 
 openmrs:
   enabled: true
+  metadata:
+    labels:
+      environment: arogyahospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: openmrs
     tag: 1.0.0-598-iplit
-  metadata:
-    labels:
-      environment: shreeclinic
 
 bahmni-web:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
   image:
     repository: infoiplitin
     name: bahmni-iplit-web
@@ -34,13 +34,12 @@ bahmni-lab:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
-
+      environment: arogyahospital
 crater:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
   config:
     AUTO_INSTALL: "true"
     ADMIN_NAME: Super Man
@@ -49,82 +48,70 @@ crater:
     COUNTRY_ID: 101
   secrets:
     ADMIN_EMAIL: "superman@bahmni.org"
-
 reports:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
   config:
     OPENMRS_HOST: "openmrs"
-
 hiu:
   enabled: true
   config:
-    POSTGRES_HOST: "bahmni-shreeclinic-postgresql"
-    RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
-    HIU_ID: "IN2710015434"
-    HIU_NAME: "Shree Clinic"
-    CONSENT_MANAGEMENT_SUFFIX: "@abdm"
+    POSTGRES_HOST: "bahmni-arogyahospital-postgresql"
+    RABBITMQ_HOST: "bahmni-arogyahospital-rabbitmq"
+    HIU_ID: "Get Well Polyclinic"
+    HIU_NAME: "Get Well Polyclinic"
+    CONSENT_MANAGEMENT_SUFFIX: "@sbx"
     CONSENT_MANAGEMENT_URL: "https://live.ndhm.gov.in/cm"
-    GATEWAY_BASE_URL: "https://live.ndhm.gov.in/gateway/v0.5"
-    GATEWAY_JWK_URL: "https://live.ndhm.gov.in/gateway/v0.5/certs"
-    HFR_AFFINITY_DOMAINS: "facility.abdm.gov.in"
-    IDENTITY_JWK_URL : "https://live.ndhm.gov.in/auth/realms/consent-manager/protocol/openid-connect/certs"
+    GATEWAY_BASE_URL: "https://dev.abdm.gov.in/gateway/v0.5"
+    GATEWAY_JWK_URL: "https://dev.abdm.gov.in/gateway/v0.5/certs"
+    HFR_AFFINITY_DOMAINS: "facilitysbx.ndhm.gov.in"
+    IDENTITY_JWK_URL : "https://dev.ndhm.gov.in/auth/realms/consent-manager/protocol/openid-connect/certs"
   metadata:
     labels:
-      environment: shreeclinic
-
+      environment: arogyahospital
 hiu-db:
   enabled: true
   config:
-    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-shreeclinic-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-arogyahospital-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
   metadata:
     labels:
-      environment: shreeclinic
-
+      environment: arogyahospital
 hiu-ui:
   enabled: true
   config:
-    POSTGRES_HOST: bahmni-shreeclinic-postgresql
-    RABBITMQ_HOST: bahmni-shreeclinic-rabbitmq
+    POSTGRES_HOST: bahmni-arogyahospital-postgresql
+    RABBITMQ_HOST: bahmni-arogyahospital-rabbitmq
   metadata:
     labels:
-      environment: shreeclinic
-
+      environment: arogyahospital
 hip:
   enabled: true
-  image:
-    repository: bahmniindiadistro
-    name: hip
-    tag: 1.0.0-328
   config:
-    CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
-    RABBITMQ_HOST: "bahmni-shreeclinic-rabbitmq"
-    BAHMNI_ID: "IN2710015434"
+    CONNECTION_STRING: "Host=bahmni-arogyahospital-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
+    RABBITMQ_HOST: "bahmni-arogyahospital-rabbitmq"
+    BAHMNI_ID: "Get Well Polyclinic"
     BAHMNI_URL: http://openmrs:8080/openmrs
-    ABHA_NUMBER_URL: "https://healthid.abdm.gov.in/api"
-    ABHA_ADDRESS_URL: "https://phr.abdm.gov.in/api"
-    GATEWAY_URL: "https://live.ndhm.gov.in/gateway"
-    GATEWAY_CMSUFFIX: "abdm"
+    GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    GATEWAY_CMSUFFIX: "sbx"
   metadata:
     labels:
-      environment: shreeclinic
-
+      environment: arogyahospital
 otp-service:
   enabled: true
   config:
-    CONNECTION_STRING: "Host=bahmni-shreeclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
+    CONNECTION_STRING: "Host=bahmni-arogyahospital-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
 hip-atomfeed:
   enabled: true
   config:
-    DATABASE_URL: "jdbc:postgresql://bahmni-shreeclinic-postgresql:5432/"
+    DATABASE_URL: "jdbc:postgresql://bahmni-arogyahospital-postgresql:5432/"
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
 
 postgresql:
   enabled: true
@@ -132,7 +119,7 @@ postgresql:
     enabled: true
   primary:
     persistence:
-      subPath: shreeclinic
+      subPath: arogyahospital
       storageClass: bahmni-efs-sc
       accessModes:
         - ReadWriteMany
@@ -159,7 +146,7 @@ patient-documents:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
   config:
     OPENMRS_HOST: "openmrs"
 
@@ -171,18 +158,18 @@ crater-atomfeed:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
 
 implementer-interface:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
 
 clinic-config:
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
   image:
     repository: infoiplitin
     name: clinic-config
@@ -192,7 +179,7 @@ abha-verification:
   enabled: true
   metadata:
     labels:
-      environment: shreeclinic
+      environment: arogyahospital
 
 bahmni-metabase:
   enabled: true
@@ -203,12 +190,12 @@ bahmni-metabase:
     MART_DB_NAME: martdb
   secrets:
     MB_ADMIN_FIRST_NAME: 'Admin'
-    MB_DB_HOST: 'bahmni-shreeclinic-postgresql'
-    MART_DB_HOST: 'bahmni-shreeclinic-postgresql'
+    MB_DB_HOST: 'bahmni-arogyahospital-postgresql'
+    MART_DB_HOST: 'bahmni-arogyahospital-postgresql'
 
 bahmni-mart:
   enabled: true
   config:
     MART_DB_NAME: martdb
   secrets:
-    MART_DB_HOST: "bahmni-shreeclinic-postgresql"
+    MART_DB_HOST: "bahmni-arogyahospital-postgresql"
