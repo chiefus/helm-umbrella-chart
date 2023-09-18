@@ -227,10 +227,6 @@ clinic-config:
   metadata:
     labels:
       environment: clinic2
-  image:
-    repository: infoiplitin
-    name: clinic-config-indiadistro
-    tag: latest
 
 abha-verification:
   enabled: true
