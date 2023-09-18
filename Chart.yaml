@@ -10,8 +10,8 @@ dependencies:
     version: ~1.0.0-0
     condition: openmrs.enabled
 
-  - repository: https://bahmni.github.io/helm-charts
-    name: bahmni-web
+  - repository: https://iplit.github.io/helm-charts
+    name: bahmni-iplit-web
     version: ~1.0.0-0
     condition: bahmni-web.enabled
 
@@ -90,8 +90,8 @@ dependencies:
     version: ~1.0.0-0
     condition: implementer-interface.enabled
 
-  - repository: https://bahmniindiadistro.github.io/helm-charts
-    name: clinic-config
+  - repository: https://iplit.github.io/helm-charts
+    name: clinic-config-indiadistro
     version: ~1.0.0-0
 
   - repository: https://iplit.github.io/helm-charts
