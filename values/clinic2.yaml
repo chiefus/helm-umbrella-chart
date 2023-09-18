@@ -15,6 +15,8 @@ openmrs:
   metadata:
     labels:
       environment: clinic2
+  config:
+    OMRS_DB_EXTRA_ARGS: "&zeroDateTimeBehavior=convertToNull"
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: openmrs
@@ -227,8 +229,8 @@ clinic-config:
       environment: clinic2
   image:
     repository: infoiplitin
-    name: clinic-config
-    tag: 1.1.0-3
+    name: clinic-config-indiadistro
+    tag: latest
 
 abha-verification:
   enabled: true
