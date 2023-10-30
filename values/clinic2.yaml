@@ -2,7 +2,8 @@ global:
   storageClass: bahmni-efs-sc
   nodeSelector:
     eks.amazonaws.com/nodegroup: nonprod
-
+  TZ: "Asia/Kolkata"
+  
 metadata:
   labels:
     environment: clinic2
