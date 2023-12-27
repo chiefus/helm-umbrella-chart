@@ -2,6 +2,7 @@ global:
   storageClass: bahmni-efs-sc
   nodeSelector:
     eks.amazonaws.com/nodegroup: NODEGROUP_NAME
+  TZ: "Asia/Kolkata"
 
 metadata:
   labels:
@@ -18,7 +19,7 @@ openmrs:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: openmrs
-    tag: 1.0.0-611.3-iplit
+    tag: 1.0.0-620-iplit
 
 bahmni-web:
   enabled: true
@@ -28,7 +29,7 @@ bahmni-web:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-iplit-web
-    tag: 1.0.0-62
+    tag: 1.0.0-72
 
 bahmni-lab:
   enabled: true
@@ -238,7 +239,7 @@ clinic-config:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: clinic-config-indiadistro
-    tag: 1.0.0-4
+    tag: 1.0.0-16
 
 abha-verification:
   enabled: true

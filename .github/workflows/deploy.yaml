@@ -35,6 +35,8 @@ on:
           - clinic1
           - clinic2
           - clinic3
+          - prajavaidyasala
+          - sehatsambhalseva
           - shreeclinic
           - deodharhospital
           - getwellpolyclinic
@@ -45,11 +47,6 @@ on:
         required: true
         type: boolean
         default: false
-      disable_openelis_jobs:
-        description: 'Set if Openelis jobs should be disabled'
-        required: true
-        type: boolean
-        default: true
       db_tenant:
         description: 'If dedicated RDS instanse is created'
         required: false
@@ -120,7 +117,9 @@ jobs:
 
       - name: Setup Environment secrets
         shell: bash
-        run: bash .github/setupEnvSecrets.sh ${{ env.ENVIRONMENT }} ${{ env.ENVIRONMENT_CLUSTER }} ${{ env.DB_TENANT }}
+        run: |
+          bash .github/setupEnvSecrets.sh ${{ env.ENVIRONMENT }} ${{ env.ENVIRONMENT_CLUSTER }} ${{ env.DB_TENANT }}
+          echo "ENV_CLINIC=${{ env.ENVIRONMENT }}" > helm_kustomization/config.properties
 
       - name: Setup databases
         if: ${{ github.event.inputs.enable_db_setup == 'true' }}
@@ -227,7 +226,8 @@ jobs:
           --set bahmni-mart.config.OPENMRS_DB_NAME=openmrs_${{ env.ENVIRONMENT }} \
           --values=values/${{ env.ENVIRONMENT }}.yaml \
           --install \
-          --namespace ${{ env.ENVIRONMENT }} --create-namespace
+          --namespace ${{ env.ENVIRONMENT }} --create-namespace \
+          --post-renderer ./helm_kustomization/kustomize.sh
 
       - name: ABDM Helm Upgrade
         run: |
@@ -257,6 +257,7 @@ jobs:
       - name: Upsert Route53 A record with CLOUDFRONT_DNS
         if: ${{ github.event.inputs.with_cloudfront == 'true' }}
         run: |
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq
           cd cloudfront/
           
           cd ../
@@ -265,8 +266,3 @@ jobs:
              '.Changes[].ResourceRecordSet.AliasTarget.DNSName = $cloudfront_dns | .Changes[0].ResourceRecordSet.Name = $environment_dns' \
               aws/route53/cloudfront.lite.mybahmni.in.json > cloudfront.recordset
           aws route53 change-resource-record-sets --hosted-zone-id ${{ secrets.HOSTED_ZONE_ID }} --change-batch file://cloudfront.recordset
-
-      - name: Disable Openelis Jobs
-        if: ${{ github.event.inputs.disable_openelis_jobs == 'true' }}
-        run: |
-          kubectl run "openelis-disable-$RANDOM" --rm -it --image alpine --env="DB_HOST=$RDS_HOST" --env="DB_USERNAME=$RDS_USERNAME" --env="DB_PASSWORD=$RDS_PASSWORD" --env="DB_NAME=openmrs_${{ env.ENVIRONMENT }}" -- sh -c 'apk add mysql-client && mysql -vvv -h$DB_HOST -u$DB_USERNAME -p$DB_PASSWORD $DB_NAME -e "UPDATE scheduler_task_config SET start_on_startup = 0 WHERE task_config_id in (6, 9, 205);"'
