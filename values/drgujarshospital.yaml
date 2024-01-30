@@ -1,10 +1,12 @@
 global:
   storageClass: bahmni-efs-sc
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: prod
   TZ: "Asia/Kolkata"
 
 metadata:
   labels:
-    environment: clinic2
+    environment: drgujarshospital
   ingress:
     PROXY_BODY_SIZE: "7m"
     ABDM_PROXY_BODY_SIZE: "30m"
@@ -13,29 +15,27 @@ openmrs:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
-  # config:
-  #   OMRS_DB_EXTRA_ARGS: "&zeroDateTimeBehavior=convertToNull"
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: openmrs
-    tag: 1.0.0-630
+    tag: 1.0.0-620-iplit
 
 bahmni-web:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-iplit-web
-    tag: 1.0.0-81
+    tag: 1.0.0-72
 
 bahmni-lab:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-lab
@@ -45,7 +45,7 @@ crater:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   config:
     AUTO_INSTALL: "true"
     ADMIN_NAME: Super Man
@@ -68,7 +68,7 @@ reports:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   config:
     OPENMRS_HOST: "openmrs"
   image:
@@ -79,13 +79,19 @@ reports:
 hiu:
   enabled: true
   config:
-    POSTGRES_HOST: "bahmni-clinic2-postgresql"
-    RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    HIU_ID: "IPLitClinic2"
-    HIU_NAME: "IPLitClinic2"
+    POSTGRES_HOST: "bahmni-drgujarshospital-postgresql"
+    RABBITMQ_HOST: "bahmni-drgujarshospital-rabbitmq"
+    HIU_ID: "drgujarshospital"
+    HIU_NAME: "drgujarshospital"
+    CONSENT_MANAGEMENT_SUFFIX: "@sbx"
+    CONSENT_MANAGEMENT_URL: "https://live.ndhm.gov.in/cm"
+    GATEWAY_BASE_URL: "https://dev.abdm.gov.in/gateway/v0.5"
+    GATEWAY_JWK_URL: "https://dev.abdm.gov.in/gateway/v0.5/certs"
+    HFR_AFFINITY_DOMAINS: "facilitysbx.ndhm.gov.in"
+    IDENTITY_JWK_URL : "https://dev.ndhm.gov.in/auth/realms/consent-manager/protocol/openid-connect/certs"
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hiu
@@ -94,10 +100,10 @@ hiu:
 hiu-db:
   enabled: true
   config:
-    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-clinic2-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
+    JAVA_TOOL_OPTIONS: "-Djdbc.url=jdbc:postgresql://bahmni-drgujarshospital-postgresql:5432/ -Djdbc.username=postgres -Djdbc.password=welcome -Djdbc.database=health_information_user"
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hiu-db
@@ -106,11 +112,11 @@ hiu-db:
 hiu-ui:
   enabled: true
   config:
-    POSTGRES_HOST: bahmni-clinic2-postgresql
-    RABBITMQ_HOST: bahmni-clinic2-rabbitmq
+    POSTGRES_HOST: bahmni-drgujarshospital-postgresql
+    RABBITMQ_HOST: bahmni-drgujarshospital-rabbitmq
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hiu-ui
@@ -119,24 +125,27 @@ hiu-ui:
 hip:
   enabled: true
   config:
-    CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
-    RABBITMQ_HOST: "bahmni-clinic2-rabbitmq"
-    BAHMNI_ID: "IPLitClinic2"
+    CONNECTION_STRING: "Host=bahmni-drgujarshospital-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
+    RABBITMQ_HOST: "bahmni-drgujarshospital-rabbitmq"
+    BAHMNI_ID: "drgujarshospital"
+    BAHMNI_URL: http://openmrs:8080/openmrs
+    GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
+    GATEWAY_CMSUFFIX: "sbx"
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hip
-    tag: 1.0.0-353
+    tag: 1.0.0-352
 
 otp-service:
   enabled: true
   config:
-    CONNECTION_STRING: "Host=bahmni-clinic2-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
+    CONNECTION_STRING: "Host=bahmni-drgujarshospital-postgresql;Port=5432;Username=postgres;Password=welcome;Database=otpservice;"
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: otp-service
@@ -145,10 +154,10 @@ otp-service:
 hip-atomfeed:
   enabled: true
   config:
-    DATABASE_URL: "jdbc:postgresql://bahmni-clinic2-postgresql:5432/"
+    DATABASE_URL: "jdbc:postgresql://bahmni-drgujarshospital-postgresql:5432/"
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hip-atomfeed
@@ -160,10 +169,12 @@ postgresql:
     enabled: true
   primary:
     persistence:
-      subPath: clinic2
+      subPath: drgujarshospital
       storageClass: bahmni-efs-sc
       accessModes:
         - ReadWriteMany
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: prod
   image:
     tag: 14-debian-11
 
@@ -176,6 +187,8 @@ rabbitmq:
     storageClass: bahmni-efs-sc
     accessModes:
       - ReadWriteMany
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: prod
   image:
     repository: rabbitmq
     tag: alpine
@@ -184,7 +197,7 @@ patient-documents:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   config:
     OPENMRS_HOST: "openmrs"
   image:
@@ -203,7 +216,7 @@ crater-atomfeed:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: crater-atomfeed
@@ -213,7 +226,7 @@ implementer-interface:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: implementer-interface
@@ -222,21 +235,21 @@ implementer-interface:
 clinic-config:
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: clinic-config-indiadistro
-    tag: 1.0.0-19
+    tag: 1.0.0-16
 
 abha-verification:
   enabled: true
   metadata:
     labels:
-      environment: clinic2
+      environment: drgujarshospital
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: abha-verification
-    tag: 1.0.0-4
+    tag: 1.0.0-3
 
 bahmni-metabase:
   enabled: true
@@ -247,8 +260,8 @@ bahmni-metabase:
     MART_DB_NAME: martdb
   secrets:
     MB_ADMIN_FIRST_NAME: 'Admin'
-    MB_DB_HOST: 'bahmni-clinic2-postgresql'
-    MART_DB_HOST: 'bahmni-clinic2-postgresql'
+    MB_DB_HOST: 'bahmni-drgujarshospital-postgresql'
+    MART_DB_HOST: 'bahmni-drgujarshospital-postgresql'
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-metabase
@@ -259,7 +272,7 @@ bahmni-mart:
   config:
     MART_DB_NAME: martdb
   secrets:
-    MART_DB_HOST: "bahmni-clinic2-postgresql"
+    MART_DB_HOST: "bahmni-drgujarshospital-postgresql"
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-mart
