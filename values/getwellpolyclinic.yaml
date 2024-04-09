@@ -19,7 +19,7 @@ openmrs:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: openmrs
-    tag: 1.0.0-611.3-iplit
+    tag: 1.0.0-630-1-iplit
 
 bahmni-web:
   enabled: true
@@ -29,7 +29,7 @@ bahmni-web:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: bahmni-iplit-web
-    tag: 1.0.0-62
+    tag: 1.0.0-85
 
 bahmni-lab:
   enabled: true
@@ -62,7 +62,7 @@ crater:
     php:
       repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
       name: crater-php
-      tag: 1.0.0
+      tag: 1.1.0-105
 
 reports:
   enabled: true
@@ -74,28 +74,28 @@ reports:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: reports
-    tag: 1.1.0-131
+    tag: 1.1.0-142
 
 hiu:
   enabled: true
   config:
     POSTGRES_HOST: "bahmni-getwellpolyclinic-postgresql"
     RABBITMQ_HOST: "bahmni-getwellpolyclinic-rabbitmq"
-    HIU_ID: "Get Well Polyclinic"
+    HIU_ID: "IN2710022778"
     HIU_NAME: "Get Well Polyclinic"
-    CONSENT_MANAGEMENT_SUFFIX: "@sbx"
-    CONSENT_MANAGEMENT_URL: "https://live.ndhm.gov.in/cm"
-    GATEWAY_BASE_URL: "https://dev.abdm.gov.in/gateway/v0.5"
-    GATEWAY_JWK_URL: "https://dev.abdm.gov.in/gateway/v0.5/certs"
-    HFR_AFFINITY_DOMAINS: "facilitysbx.ndhm.gov.in"
-    IDENTITY_JWK_URL : "https://dev.ndhm.gov.in/auth/realms/consent-manager/protocol/openid-connect/certs"
+    CONSENT_MANAGEMENT_SUFFIX: "@abdm"
+    CONSENT_MANAGEMENT_URL: "https://live.abdm.gov.in/cm"
+    GATEWAY_BASE_URL: "https://live.abdm.gov.in/gateway/v0.5"
+    GATEWAY_JWK_URL: "https://live.abdm.gov.in/gateway/v0.5/certs"
+    HFR_AFFINITY_DOMAINS: "facility.abdm.gov.in"
+    IDENTITY_JWK_URL : "https://live.abdm.gov.in/auth/realms/consent-manager/protocol/openid-connect/certs"
   metadata:
     labels:
       environment: getwellpolyclinic
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hiu
-    tag: 1.0.0-116
+    tag: 1.0.0-29
 
 hiu-db:
   enabled: true
@@ -120,24 +120,26 @@ hiu-ui:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hiu-ui
-    tag: 1.0.0-109
+    tag: 1.0.0-9
 
 hip:
   enabled: true
   config:
     CONNECTION_STRING: "Host=bahmni-getwellpolyclinic-postgresql;Port=5432;Username=postgres;Password=welcome;Database=hipservice"
     RABBITMQ_HOST: "bahmni-getwellpolyclinic-rabbitmq"
-    BAHMNI_ID: "Get Well Polyclinic"
+    BAHMNI_ID: "IN2710022778"
     BAHMNI_URL: http://openmrs:8080/openmrs
-    GATEWAY_URL: "https://dev.abdm.gov.in/gateway"
-    GATEWAY_CMSUFFIX: "sbx"
+    ABHA_NUMBER_URL: "https://healthid.abdm.gov.in/api"
+    ABHA_ADDRESS_URL: "https://phr.abdm.gov.in/api"
+    GATEWAY_URL: "https://live.abdm.gov.in/gateway"
+    GATEWAY_CMSUFFIX: "abdm"
   metadata:
     labels:
       environment: getwellpolyclinic
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: hip
-    tag: 1.0.0-352
+    tag: 1.0.0-147
 
 otp-service:
   enabled: true
@@ -167,6 +169,10 @@ postgresql:
   enabled: true
   volumePermissions:
     enabled: true
+    image:
+      registry: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
+      repository: bitnami-shell
+      tag: 11-debian-11-r50
   primary:
     persistence:
       subPath: getwellpolyclinic
@@ -176,6 +182,8 @@ postgresql:
     nodeSelector:
       eks.amazonaws.com/nodegroup: prod
   image:
+    registry: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
+    repository: postgresql
     tag: 14-debian-11
 
 rabbitmq:
@@ -202,14 +210,14 @@ patient-documents:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: patient-documents
-    tag: 1.1.0-28
+    tag: 1.1.0-29
 
 appointments:
   enabled: true
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: appointments
-    tag: 1.1.0-81
+    tag: 1.1.0-95
 
 crater-atomfeed:
   enabled: true
@@ -229,7 +237,7 @@ implementer-interface:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: implementer-interface
-    tag: 1.1.0-62
+    tag: 1.1.0-67
 
 clinic-config:
   metadata:
@@ -238,7 +246,7 @@ clinic-config:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: clinic-config-indiadistro
-    tag: 1.0.0-4
+    tag: 1.0.0-26
 
 abha-verification:
   enabled: true
@@ -248,7 +256,7 @@ abha-verification:
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
     name: abha-verification
-    tag: 1.0.0-3
+    tag: 1.0.0-4
 
 bahmni-metabase:
   enabled: true

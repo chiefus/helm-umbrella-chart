@@ -131,16 +131,23 @@ patchesStrategicMerge:
         containers:
         - name: openmrs
           livenessProbe:
-            exec:
-              command:
-              - curl
-              - http://127.0.0.1:8080/openmrs/
-            initialDelaySeconds: 360
+            httpGet:
+              path: /openmrs/
+              port: 8080
+              scheme: HTTP
+            timeoutSeconds: 1
             periodSeconds: 30
-          readinessProbe:
-            exec:
-              command:
-              - curl
-              - http://127.0.0.1:8080/openmrs/
-            initialDelaySeconds: 360
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /openmrs/
+              port: 8080
+              scheme: HTTP
+            timeoutSeconds: 1
             periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 40
+
+- crater-mail-secrets.yml
+- hip-config-map.yml

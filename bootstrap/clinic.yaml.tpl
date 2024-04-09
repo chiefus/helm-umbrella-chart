@@ -18,8 +18,8 @@ openmrs:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: openmrs
-    tag: 1.0.0-626-10-iplit
+    name: bahmnilite/infoiplitin/openmrs
+    tag: iplit-1.0.0-639-5
 
 bahmni-web:
   enabled: true
@@ -28,8 +28,8 @@ bahmni-web:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: bahmni-iplit-web
-    tag: 1.0.0-81
+    name: bahmnilite/infoiplitin/bahmni-iplit-web
+    tag: 1.0.0-85
 
 bahmni-lab:
   enabled: true
@@ -38,7 +38,7 @@ bahmni-lab:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: bahmni-lab
+    name: bahmnilite/bahmni/bahmni-lab
     tag: 1.1.0-171
 
 crater:
@@ -57,12 +57,12 @@ crater:
   image:
     nginx:
       repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-      name: crater-nginx
+      name: bahmnilite/bahmni/crater-nginx
       tag: 1.1.0-218
     php:
       repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-      name: crater-php
-      tag: 1.0.0
+      name: bahmnilite/bahmni/crater-php
+      tag: 1.1.0-105
 
 reports:
   enabled: true
@@ -73,8 +73,8 @@ reports:
     OPENMRS_HOST: "openmrs"
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: reports
-    tag: 1.1.0-131
+    name: bahmnilite/bahmni/reports
+    tag: 1.1.0-142
 
 hiu:
   enabled: true
@@ -94,8 +94,8 @@ hiu:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: hiu
-    tag: 1.0.0-116
+    name: bahmnilite/infoiplitin/hiu
+    tag: 1.0.0-29
 
 hiu-db:
   enabled: true
@@ -106,7 +106,7 @@ hiu-db:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: hiu-db
+    name: bahmnilite/bahmniindiadistro/hiu-db
     tag: 1.0.0-74
 
 hiu-ui:
@@ -119,8 +119,8 @@ hiu-ui:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: hiu-ui
-    tag: 1.0.0-109
+    name: bahmnilite/infoiplitin/hiu-ui
+    tag: 1.0.0-9
 
 hip:
   enabled: true
@@ -136,8 +136,8 @@ hip:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: hip
-    tag: 1.0.0-353
+    name: bahmnilite/infoiplitin/hip
+    tag: 1.0.0-147
 
 otp-service:
   enabled: true
@@ -148,7 +148,7 @@ otp-service:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: otp-service
+    name: bahmnilite/infoiplitin/otp-service
     tag: 1.0.0-12
 
 hip-atomfeed:
@@ -160,13 +160,17 @@ hip-atomfeed:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: hip-atomfeed
+    name: bahmnilite/bahmniindiadistro/hip-atomfeed
     tag: 1.0.0-109
 
 postgresql:
   enabled: true
   volumePermissions:
     enabled: true
+    image:
+      registry: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
+      repository: bitnami-shell
+      tag: 11-debian-11-r50
   primary:
     persistence:
       subPath: TENANT_NAME
@@ -176,6 +180,8 @@ postgresql:
     nodeSelector:
       eks.amazonaws.com/nodegroup: NODEGROUP_NAME
   image:
+    registry: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
+    repository: postgresql
     tag: 14-debian-11
 
 rabbitmq:
@@ -202,15 +208,15 @@ patient-documents:
     OPENMRS_HOST: "openmrs"
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: patient-documents
-    tag: 1.1.0-28
+    name: bahmnilite/bahmni/patient-documents
+    tag: 1.1.0-29
 
 appointments:
   enabled: true
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: appointments
-    tag: 1.1.0-81
+    name: bahmnilite/bahmni/appointments
+    tag: 1.1.0-95
 
 crater-atomfeed:
   enabled: true
@@ -219,7 +225,7 @@ crater-atomfeed:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: crater-atomfeed
+    name: bahmnilite/bahmni/crater-atomfeed
     tag: 1.1.0-125
 
 implementer-interface:
@@ -229,8 +235,8 @@ implementer-interface:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: implementer-interface
-    tag: 1.1.0-62
+    name: bahmnilite/bahmni/implementer-interface
+    tag: 1.1.0-67
 
 clinic-config:
   metadata:
@@ -238,8 +244,8 @@ clinic-config:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: clinic-config-indiadistro
-    tag: 1.0.0-19
+    name: bahmnilite/infoiplitin/clinic-config-indiadistro
+    tag: 1.0.0-26
 
 abha-verification:
   enabled: true
@@ -248,7 +254,7 @@ abha-verification:
       environment: TENANT_NAME
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: abha-verification
+    name: bahmnilite/infoiplitin/abha-verification
     tag: 1.0.0-3
 
 bahmni-metabase:
@@ -264,7 +270,7 @@ bahmni-metabase:
     MART_DB_HOST: 'bahmni-TENANT_NAME-postgresql'
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: bahmni-metabase
+    name: bahmnilite/bahmni/bahmni-metabase
     tag: 1.1.0-34
 
 bahmni-mart:
@@ -275,5 +281,5 @@ bahmni-mart:
     MART_DB_HOST: "bahmni-TENANT_NAME-postgresql"
   image:
     repository: 600047163007.dkr.ecr.ap-south-1.amazonaws.com
-    name: bahmni-mart
+    name: bahmnilite/bahmni/bahmni-mart
     tag: 1.1.0-59
