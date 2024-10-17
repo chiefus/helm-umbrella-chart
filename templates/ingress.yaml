@@ -1,0 +1,245 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bahmni-ingress
+  labels:
+    environment: {{ .Values.metadata.labels.environment }}
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header Cache-Control "no-cache, max-age=0";
+      add_header Content-Security-Policy "default-src 'self' data: *.bahmnilite.in meet.jit.si cdnjs.cloudflare.com cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval' 'img-src'; worker-src blob:; upgrade-insecure-requests; block-all-mixed-content";
+      add_header Cross-Origin-Embedder-Policy "unsafe-none";
+      add_header Cross-Origin-Opener-Policy "same-origin";
+      add_header Cross-Origin-Resource-Policy "same-origin";
+      add_header Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), document-domain=(), encrypted-media=(), gamepad=(), geolocation=(), gyroscope=(), layout-animations=self, legacy-image-formats=self, magnetometer=(), midi=(), oversized-images=self, payment=(), publickey-credentials-get=(), speaker-selection=(), sync-xhr=self, unoptimized-images=self, unsized-media=self, usb=(), screen-wake-lock=(), web-share=(), xr-spatial-tracking=()";
+      add_header Pragma "no-cache";
+      add_header Referrer-Policy "same-origin";
+      add_header Strict-Transport-Security "max-age=31536000 ; includeSubDomains";
+      add_header X-Content-Type-Options "nosniff";
+      add_header X-Frame-Options "SAMEORIGIN";
+      add_header X-Permitted-Cross-Domain-Policies "none";
+      add_header Set-Cookie "Path=/; HttpOnly; Secure";
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.PROXY_BODY_SIZE }}
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          {{- if index .Values "bahmni-web" "enabled" }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bahmni-web
+                port:
+                  number: 8091
+          {{- end }}
+
+          {{- if index .Values "bahmni-lab" "enabled" }}
+          - path: /lab
+            pathType: Prefix
+            backend:
+              service:
+                name: bahmni-lab
+                port:
+                  number: 8090
+          {{- end }}
+
+          {{- if .Values.reports.enabled }}
+          - path: /bahmnireports
+            pathType: Prefix
+            backend:
+              service:
+                name: reports
+                port:
+                  number: 8051
+          {{- end }}
+
+          {{- if index .Values "patient-documents" "enabled" }}
+          - path: /document_images
+            pathType: Prefix
+            backend:
+              service:
+                name: patient-documents
+                port:
+                  number: 8099
+          - path: /uploaded_results
+            pathType: Prefix
+            backend:
+              service:
+                name: patient-documents
+                port:
+                  number: 8099
+          {{- end }}
+
+          {{- if index .Values "patient-documents" "enabled" }}
+          - path: /openmrs/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: patient-documents
+                port:
+                  number: 8099
+          {{- end }}
+
+          {{- if index .Values "appointments" "enabled" }}
+          - path: /appointments
+            pathType: Prefix
+            backend:
+              service:
+                name: appointments
+                port:
+                  number: 80
+          {{- end }}
+
+          {{- if index .Values "implementer-interface" "enabled" }}
+          - path: /implementer-interface
+            pathType: Prefix
+            backend:
+              service:
+                name: implementer-interface
+                port:
+                  number: 80
+          {{- end }}
+
+          {{- if index .Values "abha-verification" "enabled" }}
+          - path: /abha-verification
+            pathType: Prefix
+            backend:
+              service:
+                name: abha-verification
+                port:
+                  number: 80
+         {{- end }}
+
+    - host: payments-{{ .Values.ingress.host }}
+      http:
+        paths:
+          {{- if .Values.crater.enabled }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: crater-nginx
+                port:
+                  number: 80
+          {{- end }}
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openmrs-ingress
+  labels:
+    environment: {{ .Values.metadata.labels.environment }}
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header Set-Cookie "reporting_session=$cookie_JSESSIONID;Path=/;Max-Age=86400";
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.PROXY_BODY_SIZE }}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          {{- if index .Values "openmrs" "enabled" }}
+          - path: /openmrs
+            pathType: Prefix
+            backend:
+              service:
+                name: openmrs
+                port:
+                  number: 8080
+          {{- end }}
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: abdm-ingress
+  labels:
+    environment: {{ .Values.metadata.labels.environment }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.ABDM_PROXY_BODY_SIZE }}
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ^~ /hiprovider {
+          if ($http_X_HIU_ID != '') {
+            rewrite  ^/hiprovider(.*) /hiu-api$1 last;
+          }
+          rewrite  ^/hiprovider(.*) /hip$1 last;
+      }
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          {{- if .Values.hiu.enabled }}
+          - path: /hiu-api/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: hiu
+                port:
+                  number: 9053
+          {{- end }}
+
+          {{- if .Values.hip.enabled }}
+          - path: /hip/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: hip
+                port:
+                  number: 8000
+          {{- end }}
+
+          {{- if index .Values "hiu-ui" "enabled" }}
+          - path: /hiuser(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: hiu-ui
+                port:
+                  number: 5000
+          {{- end }}
+
+          {{- if index .Values "otp-service" "enabled" }}
+          - path: /otp-service/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: otp-service
+                port:
+                  number: 80
+          {{- end }}
+
+---
+
+{{- if index .Values "bahmni-metabase" "enabled" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: metabase-ingress
+  labels:
+    environment: {{ .Values.metadata.labels.environment }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.metadata.ingress.PROXY_BODY_SIZE }}
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /metabase/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: bahmni-metabase
+                port:
+                  number: 3000
+{{- end }}
